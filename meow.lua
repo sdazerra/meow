@@ -1,8 +1,8 @@
 local placeId = game.PlaceId
 
 local games = {
-    [12629753855] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/e/main/meowgui.lua', true))()",
-    [8387888847] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/e/main/autowalk.lua', true))()",
+    [12629753855] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/meowgui.lua', true))()",
+    [8387888847] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/autowalk.lua', true))()",
     [16498369169] = [[
         getgenv().AuthKey = "HUGE_EPCI785dKB1p"
         getgenv().LoadSettings = {
@@ -82,7 +82,7 @@ if not loadstringsOrScriptsToExecute then
         button.MouseButton1Click:Connect(function()
             gui:Destroy()
             if gameId == 12629753855 then
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/e/main/meowgui.lua', true))()
+                loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/meowgui.lua', true))()
             elseif gameId == 16498369169 then
                 getgenv().AuthKey = "HUGE_EPCI785dKB1p"
                 getgenv().LoadSettings = {
