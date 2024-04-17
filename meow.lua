@@ -1,3 +1,7 @@
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+
 local placeId = game.PlaceId
 
 local games = {
