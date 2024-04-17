@@ -75,6 +75,7 @@ local buttonTexts = {
     [13772394625] = "Plutonium",
     [286090429] = "Arsenal",
     [7449423635] = "HoHo",
+    [69] = "Infinite Yield",
     ["Accidentally Executed"] = "Accidentally Executed"
 }
 
@@ -107,6 +108,8 @@ for gameId, buttonText in pairs(buttonTexts) do
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua', true))()
             elseif gameId == 7449423635 then
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
+            elseif gameId == 69 then
+             loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
             elseif gameId == 286090429 then
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/Universal%20Aimbot.lua', true))()
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/Universal%20Box%20ESP.lua', true))()
