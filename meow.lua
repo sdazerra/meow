@@ -32,7 +32,6 @@ for _, id in ipairs(additionalPlaceIDs) do
     games[id] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()"
 end
 
--- Update additionalPlaceIDsV2 to execute the specified script
 for _, id in ipairs(additionalPlaceIDsV2) do
     games[id] = [[
         getgenv().AuthKey = "HUGE_EPCI785dKB1p"
