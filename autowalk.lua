@@ -1,3 +1,7 @@
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+
 local game = game
 local players = game.Players
 local whitelist = {1443239610, 2750020740}
@@ -67,8 +71,4 @@ while true do
     end
 
     wait(1)
-end
-
-while wait() do
-    game:GetService("ReplicatedStorage").FoundFriend:FireServer(5)
 end
