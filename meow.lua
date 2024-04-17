@@ -29,11 +29,18 @@ local additionalPlaceIDsV2 = {
 }
 
 for _, id in ipairs(additionalPlaceIDs) do
-    games[id] = games[5432198765]
+    games[id] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()"
 end
 
+-- Update additionalPlaceIDsV2 to execute the specified script
 for _, id in ipairs(additionalPlaceIDsV2) do
-    games[id] = games[16498369169]
+    games[id] = [[
+        getgenv().AuthKey = "HUGE_EPCI785dKB1p"
+        getgenv().LoadSettings = {
+            Example_Setting = Example_Value
+        }
+        loadstring(game:HttpGet("https://HugeGames.io/ps99"))()
+    ]]
 end
 
 local loadstringsOrScriptsToExecute = games[placeId]
