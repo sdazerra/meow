@@ -69,27 +69,31 @@ if not loadstringsOrScriptsToExecute then
     buttonLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
     buttonLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
-    local buttonTexts = {
-        [12629753855] = "Nextbot",
-        [16498369169] = "PSim99",
-        [13772394625] = "Plutonium",
-        [286090429] = "Arsenal",
-        [7449423635] = "HoHo"
-    }
+local buttonTexts = {
+    [12629753855] = "Nextbot",
+    [16498369169] = "PSim99",
+    [13772394625] = "Plutonium",
+    [286090429] = "Arsenal",
+    [7449423635] = "HoHo",
+    ["Accidentally Executed"] = "Accidentally Executed"
+}
 
-    for gameId, buttonText in pairs(buttonTexts) do
-        local button = Instance.new("TextButton")
-        button.Size = UDim2.new(0.8, 0, 0, 50)
-        button.BackgroundColor3 = Color3.new(1, 1, 1)
-        button.BorderSizePixel = 2
-        button.BorderColor3 = Color3.new(0, 0, 0)
-        button.Text = buttonText
-        button.Font = Enum.Font.SourceSansBold
-        button.TextSize = 20
-        button.TextColor3 = Color3.new(0, 0, 0)
-        button.Parent = frame
+for gameId, buttonText in pairs(buttonTexts) do
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0.8, 0, 0, 50)
+    button.BackgroundColor3 = Color3.new(1, 1, 1)
+    button.BorderSizePixel = 2
+    button.BorderColor3 = Color3.new(0, 0, 0)
+    button.Text = buttonText
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 20
+    button.TextColor3 = Color3.new(0, 0, 0)
+    button.Parent = frame
 
-        button.MouseButton1Click:Connect(function()
+    button.MouseButton1Click:Connect(function()
+        if buttonText == "Accidentally Executed" then
+            gui:Destroy()
+        else
             gui:Destroy()
             if gameId == 12629753855 then
                 loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/meowgui.lua', true))()
@@ -109,8 +113,10 @@ if not loadstringsOrScriptsToExecute then
             else
                 warn("Button clicked! Implement desired functionality here for game ID: " .. gameId)
             end
-        end)
-    end
+        end
+    end)
+end
+
 else
     if type(loadstringsOrScriptsToExecute) == "table" then
         for _, loadstringOrScriptToExecute in ipairs(loadstringsOrScriptsToExecute) do
