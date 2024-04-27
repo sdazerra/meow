@@ -1,131 +1,137 @@
+print("im gay")
+print("you're gay")
+print("you're gay")
+
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
     v:Disable()
 end
 
-local placeId = game.PlaceId
+local location1 = CFrame.new(Vector3.new(-742.771, 240.207, -450.902))
+local location2 = CFrame.new(Vector3.new(-795.143, 247, -449.75))
 
-local games = {
-    [12629753855] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/meowgui.lua', true))()",
-    [8387888847] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/autowalk.lua', true))()",
-    [16498369169] = [[
-        getgenv().AuthKey = "HUGE_EPCI785dKB1p"
-        getgenv().LoadSettings = {
-            Example_Setting = Example_Value
-        }
-        loadstring(game:HttpGet("https://HugeGames.io/ps99"))()
-    ]],
-    [13772394625] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua', true))()",
-    [286090429] = {
-        "loadstring(game:HttpGet('https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/Universal%20Aimbot.lua', true))()",
-        "loadstring(game:HttpGet('https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/Universal%20Box%20ESP.lua', true))()"
-    },
-    [7449423635] = {
-        "loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()"
-    }
-}
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local additionalPlaceIDs = {
-    2753915549, 4442272183
-}
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.15, 0, 0.5, 0)
+frame.Position = UDim2.new(0.02, 0, 0.25, 0)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BorderSizePixel = 2
+frame.BorderColor3 = Color3.new(1, 1, 1)
+frame.Parent = gui
 
-local additionalPlaceIDsV2 = {
-    8737899170
-}
-
-for _, id in ipairs(additionalPlaceIDs) do
-    games[id] = "loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()"
-end
-
-for _, id in ipairs(additionalPlaceIDsV2) do
-    games[id] = [[
-        getgenv().AuthKey = "HUGE_EPCI785dKB1p"
-        getgenv().LoadSettings = {
-            Example_Setting = Example_Value
-        }
-        loadstring(game:HttpGet("https://HugeGames.io/ps99"))()
-    ]]
-end
-
-local loadstringsOrScriptsToExecute = games[placeId]
-
-if not loadstringsOrScriptsToExecute then
-    warn("No loadstring or script found for the current game's PlaceID. Generating GUI...")
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "GameScriptsGUI"
-    gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-    local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0.5, 0, 0.5, 0)
-    frame.Position = UDim2.new(0.25, 0, 0.25, 0)
-    frame.BackgroundColor3 = Color3.new(0, 0, 0)
-    frame.BorderColor3 = Color3.new(1, 1, 1)
-    frame.BorderSizePixel = 2
-    frame.BackgroundTransparency = 0.7
-    frame.Parent = gui
-
-    local buttonLayout = Instance.new("UIListLayout")
-    buttonLayout.Parent = frame
-    buttonLayout.FillDirection = Enum.FillDirection.Vertical
-    buttonLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    buttonLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-
-local buttonTexts = {
-    [12629753855] = "Nextbot",
-    [16498369169] = "PSim99",
-    [13772394625] = "Plutonium",
-    [286090429] = "Arsenal",
-    [7449423635] = "HoHo",
-    [69] = "Infinite Yield",
-    ["Accidentally Executed"] = "Accidentally Executed"
-}
-
-for gameId, buttonText in pairs(buttonTexts) do
-    local button = Instance.new("TextButton")
-    button.Size = UDim2.new(0.8, 0, 0, 50)
-    button.BackgroundColor3 = Color3.new(1, 1, 1)
-    button.BorderSizePixel = 2
-    button.BorderColor3 = Color3.new(0, 0, 0)
-    button.Text = buttonText
-    button.Font = Enum.Font.SourceSansBold
-    button.TextSize = 20
-    button.TextColor3 = Color3.new(0, 0, 0)
-    button.Parent = frame
-
-    button.MouseButton1Click:Connect(function()
-        if buttonText == "Accidentally Executed" then
-            gui:Destroy()
-        else
-            gui:Destroy()
-            if gameId == 12629753855 then
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/sdazerra/meow/main/meowgui.lua', true))()
-            elseif gameId == 16498369169 then
-                getgenv().AuthKey = "HUGE_EPCI785dKB1p"
-                getgenv().LoadSettings = {
-                    Example_Setting = Example_Value
-                }
-                loadstring(game:HttpGet("https://HugeGames.io/ps99"))()
-            elseif gameId == 13772394625 then
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua', true))()
-            elseif gameId == 7449423635 then
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-            elseif gameId == 69 then
-             loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-            elseif gameId == 286090429 then
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/Universal%20Aimbot.lua', true))()
-                loadstring(game:HttpGet('https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/Universal%20Box%20ESP.lua', true))()
-            else
-                warn("Button clicked! Implement desired functionality here for game ID: " .. gameId)
-            end
-        end
-    end)
-end
-
-else
-    if type(loadstringsOrScriptsToExecute) == "table" then
-        for _, loadstringOrScriptToExecute in ipairs(loadstringsOrScriptsToExecute) do
-            loadstring(loadstringOrScriptToExecute)()
-        end
+local function setButtonColor(button, enabled)
+    if enabled then
+        button.BackgroundColor3 = Color3.new(0, 1, 0)
     else
-        loadstring(loadstringsOrScriptsToExecute)()
+        button.BackgroundColor3 = Color3.new(1, 0, 0)
     end
 end
+
+local teleportButton = Instance.new("TextButton")
+teleportButton.Text = "Toggle Teleportation"
+teleportButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+teleportButton.Position = UDim2.new(0.1, 0, 0.1, 0)
+teleportButton.Parent = frame
+
+local godModeButton = Instance.new("TextButton")
+godModeButton.Text = "Toggle God Mode"
+godModeButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+godModeButton.Position = UDim2.new(0.1, 0, 0.25, 0)
+godModeButton.Parent = frame
+
+local fullbrightButton = Instance.new("TextButton")
+fullbrightButton.Text = "Toggle Fullbright"
+fullbrightButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+fullbrightButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+fullbrightButton.Parent = frame
+
+local destroyButton = Instance.new("TextButton")
+destroyButton.Text = "Destroy GUI"
+destroyButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+destroyButton.Position = UDim2.new(0.1, 0, 0.9, 0)
+destroyButton.Parent = frame
+
+local isTeleporting = false
+local isGodMode = false
+local isFullbright = false
+
+local function teleportLoop()
+    while isTeleporting do
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(location1)
+        wait(10)
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(location2)
+        wait(10)
+    end
+end
+
+local function onTeleportButtonClick()
+    isTeleporting = not isTeleporting
+    if isTeleporting then
+        teleportLoop()
+    end
+    setButtonColor(teleportButton, isTeleporting)
+end
+
+local function onGodModeButtonClick()
+    isGodMode = not isGodMode
+    if isGodMode then
+        local character = game.Players.LocalPlayer.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.MaxHealth = math.huge
+                humanoid.Health = humanoid.MaxHealth
+            end
+        end
+    else
+        local character = game.Players.LocalPlayer.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.MaxHealth = 100
+                humanoid.Health = humanoid.MaxHealth
+            end
+        end
+    end
+    setButtonColor(godModeButton, isGodMode)
+end
+
+local function onFullbrightButtonClick()
+    isFullbright = not isFullbright
+    if isFullbright then
+        game.Lighting.GlobalShadows = false
+        game.Lighting.Ambient = Color3.new(1, 1, 1)
+        game.Lighting.Brightness = 2
+    else
+        game.Lighting.GlobalShadows = true
+        game.Lighting.Ambient = Color3.new(0.5, 0.5, 0.5)
+        game.Lighting.Brightness = 1
+    end
+    setButtonColor(fullbrightButton, isFullbright)
+end
+
+local function onDestroyButtonClick()
+    gui:Destroy()
+end
+
+teleportButton.MouseButton1Click:Connect(onTeleportButtonClick)
+godModeButton.MouseButton1Click:Connect(onGodModeButtonClick)
+fullbrightButton.MouseButton1Click:Connect(onFullbrightButtonClick)
+destroyButton.MouseButton1Click:Connect(onDestroyButtonClick)
+
+setButtonColor(teleportButton, isTeleporting)
+setButtonColor(godModeButton, isGodMode)
+setButtonColor(fullbrightButton, isFullbright)
+
+local function toggleGui()
+    gui.Enabled = not gui.Enabled
+end
+
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.RightControl then
+        toggleGui()
+    end
+end)
