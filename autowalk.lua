@@ -13,29 +13,37 @@ end
 
 local function setWalkSpeed(speed)
     for _, player in ipairs(players:GetPlayers()) do
+        local character = player.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.WalkSpeed = speed
+            end
+        end
+    end
+end
+
+local function moveWhitelistedPlayersToSpawn(spawnPosition)
+    for _, player in ipairs(players:GetPlayers()) do
         if isPlayerWhitelisted(player) then
             local character = player.Character
             if character then
                 local humanoid = character:FindFirstChildOfClass("Humanoid")
                 if humanoid then
-                    humanoid.WalkSpeed = speed
+                    humanoid:MoveTo(spawnPosition)
                 end
             end
         end
     end
 end
 
-local function areOnlyWhitelistedPlayersInGame()
-    local whitelistedPlayersPresent = 0
-    local nonWhitelistedPlayersPresent = false
+local function areNonWhitelistedPlayersPresent()
     for _, player in ipairs(players:GetPlayers()) do
-        if isPlayerWhitelisted(player) then
-            whitelistedPlayersPresent = whitelistedPlayersPresent + 1
-        else
-            nonWhitelistedPlayersPresent = true
+        if not isPlayerWhitelisted(player) then
+            return true
         end
     end
-    return whitelistedPlayersPresent > 0 and whitelistedPlayersPresent == #players:GetPlayers(), nonWhitelistedPlayersPresent
+    return false
 end
 
 local spawnArea = game.Workspace.SpawnArea
@@ -43,26 +51,18 @@ local defaultSpeed = 16
 local whitelistedSpeed = 100
 
 while true do
-    local onlyWhitelisted, nonWhitelistedPresent = areOnlyWhitelistedPlayersInGame()
-    if nonWhitelistedPresent then
+    if areNonWhitelistedPlayersPresent() then
         setWalkSpeed(defaultSpeed)
-    elseif onlyWhitelisted then
+    else
         setWalkSpeed(whitelistedSpeed)
-
-        local spawnPosition = Vector3.new(
-            math.random(spawnArea.Position.X - spawnArea.Size.X/2, spawnArea.Position.X + spawnArea.Size.X/2),
-            spawnArea.Position.Y,
-            math.random(spawnArea.Position.Z - spawnArea.Size.Z/2, spawnArea.Position.Z + spawnArea.Size.Z/2)
-        )
-
-        for _, player in ipairs(players:GetPlayers()) do
-            if isPlayerWhitelisted(player) then
-                local character = player.Character or player.CharacterAdded:Wait()
-                local humanoid = character:WaitForChild("Humanoid")
-                humanoid:MoveTo(spawnPosition)
-            end
-        end
     end
+
+    local spawnPosition = Vector3.new(
+        math.random(spawnArea.Position.X - spawnArea.Size.X/2, spawnArea.Position.X + spawnArea.Size.X/2),
+        spawnArea.Position.Y,
+        math.random(spawnArea.Position.Z - spawnArea.Size.Z/2, spawnArea.Position.Z + spawnArea.Size.Z/2)
+    )
+    moveWhitelistedPlayersToSpawn(spawnPosition)
 
     wait(1)
 end
