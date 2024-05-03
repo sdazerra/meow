@@ -1,10 +1,6 @@
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
-    v:Disable()
-end
-
 local game = game
 local players = game.Players
-local whitelist = {1443239610, 2750020740}
+local whitelist = {1443239610, 2750020740, 5608834923}
 
 local function isPlayerWhitelisted(player)
     for _, id in ipairs(whitelist) do
@@ -13,19 +9,6 @@ local function isPlayerWhitelisted(player)
         end
     end
     return false
-end
-
-local function areOnlyWhitelistedPlayersInGame()
-    local whitelistedPlayersPresent = 0
-    local nonWhitelistedPlayersPresent = false
-    for _, player in ipairs(players:GetPlayers()) do
-        if isPlayerWhitelisted(player) then
-            whitelistedPlayersPresent = whitelistedPlayersPresent + 1
-        else
-            nonWhitelistedPlayersPresent = true
-        end
-    end
-    return whitelistedPlayersPresent == #whitelist, nonWhitelistedPlayersPresent
 end
 
 local function setWalkSpeed(speed)
@@ -42,6 +25,19 @@ local function setWalkSpeed(speed)
     end
 end
 
+local function areOnlyWhitelistedPlayersInGame()
+    local whitelistedPlayersPresent = 0
+    local nonWhitelistedPlayersPresent = false
+    for _, player in ipairs(players:GetPlayers()) do
+        if isPlayerWhitelisted(player) then
+            whitelistedPlayersPresent = whitelistedPlayersPresent + 1
+        else
+            nonWhitelistedPlayersPresent = true
+        end
+    end
+    return whitelistedPlayersPresent > 0 and whitelistedPlayersPresent == #players:GetPlayers(), nonWhitelistedPlayersPresent
+end
+
 local spawnArea = game.Workspace.SpawnArea
 local defaultSpeed = 16
 local whitelistedSpeed = 100
@@ -52,9 +48,7 @@ while true do
         setWalkSpeed(defaultSpeed)
     elseif onlyWhitelisted then
         setWalkSpeed(whitelistedSpeed)
-    end
 
-    if onlyWhitelisted then
         local spawnPosition = Vector3.new(
             math.random(spawnArea.Position.X - spawnArea.Size.X/2, spawnArea.Position.X + spawnArea.Size.X/2),
             spawnArea.Position.Y,
